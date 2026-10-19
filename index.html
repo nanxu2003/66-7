@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOST Studio Limited | 品味香港 從這一餐開始</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#2d1810',      // 深巧克力
+                            deep: '#1c0f08',
+                            primary: '#b91c1c',    // 招牌紅
+                            accent: '#f59e0b',     // 暖橙
+                            cream: '#fdf6ec',      // 奶油白
+                            gold: '#e8c877'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Noto Serif TC"', 'serif'],
+                        sans: ['"Noto Sans TC"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .font-serif { font-family: 'Noto Serif TC', serif; }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        .glass-nav {
+            background: rgba(29, 15, 8, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(245, 158, 11, 0.2);
+        }
+
+        .hero-bg {
+            background-image: linear-gradient(rgba(29, 15, 8, 0.75), rgba(29, 15, 8, 0.55)), url('https://picsum.photos/id/292/1920/1080');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(185, 28, 28, 0.2);
+        }
+
+        .dish-card img { transition: transform 0.6s ease; }
+        .dish-card:hover img { transform: scale(1.07) rotate(1deg); }
+    </style>
+</head>
+<body class="bg-brand-cream text-slate-700 antialiased overflow-x-hidden">
+
+    <!-- 頂部公告 -->
+    <div class="bg-brand-deep text-brand-gold text-xs py-2 px-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <span><i class="fas fa-fire mr-2"></i>秋季限定：大閘蟹宴套餐現已接受訂座，每位港幣 688 元起。</span>
+            <span class="hidden md:block">訂座熱線：57017745</span>
+        </div>
+    </div>
+
+    <!-- 導航 -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-5 top-8">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-11 h-11 bg-gradient-to-br from-brand-primary to-brand-accent rounded-lg flex items-center justify-center text-white text-xl shadow-lg">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <div class="text-white">
+                    <h1 class="font-serif font-bold text-lg leading-tight">LOST Studio</h1>
+                    <p class="text-[10px] tracking-[0.3em] text-brand-gold uppercase">F &amp; B Group</p>
+                </div>
+            </div>
+
+            <div class="hidden md:flex space-x-8 text-white text-sm font-medium">
+                <a href="#home" class="hover:text-brand-accent transition">首頁</a>
+                <a href="#about" class="hover:text-brand-accent transition">關於我們</a>
+                <a href="#brands" class="hover:text-brand-accent transition">旗下品牌</a>
+                <a href="#dishes" class="hover:text-brand-accent transition">招牌菜式</a>
+                <a href="#process" class="hover:text-brand-accent transition">訂座流程</a>
+                <a href="#contact" class="hover:text-brand-accent transition">聯絡我們</a>
+            </div>
+
+            <a href="#contact" class="hidden md:inline-block px-6 py-2.5 bg-brand-accent text-brand-dark font-bold rounded-full hover:bg-amber-600 transition duration-300 text-sm shadow-lg">
+                立即訂座
+            </a>
+
+            <button class="md:hidden text-white text-2xl"><i class="fas fa-bars"></i></button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header id="home" class="hero-bg h-screen flex items-center justify-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-black/25"></div>
+        <div class="container mx-auto px-6 relative z-10 text-center text-white mt-16">
+            <span class="inline-block py-1 px-4 border border-brand-accent/60 rounded-full text-brand-accent text-sm mb-6 tracking-[0.3em] reveal">TASTE OF HONG KONG · SINCE 2008</span>
+            <h2 class="font-serif text-5xl md:text-7xl font-black mb-6 leading-tight reveal" style="transition-delay: 100ms;">
+                一餐一飯，<br><span class="text-brand-gold">皆是香港味道。</span>
+            </h2>
+            <p class="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto reveal" style="transition-delay: 200ms;">
+                LOST Studio Limited 旗下八大餐飲品牌，從米芝蓮粵菜到街頭小食，用誠意與匠心，煮出屬於香港的溫度。
+            </p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center reveal" style="transition-delay: 300ms;">
+                <a href="#brands" class="px-8 py-4 bg-brand-accent text-brand-dark font-bold rounded-lg hover:bg-amber-600 transition shadow-lg shadow-amber-500/40">
+                    探索旗下品牌 <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+                <a href="#contact" class="px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg font-bold hover:bg-white/20 transition">
+                    預約訂座
+                </a>
+            </div>
+        </div>
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-white/50">
+            <i class="fas fa-chevron-down text-2xl"></i>
+        </div>
+    </header>
+
+    <!-- 數據統計 -->
+    <section class="py-10 bg-white relative -mt-10 z-20 shadow-xl rounded-t-3xl mx-4 md:mx-10">
+        <div class="container mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-gray-100">
+            <div class="reveal">
+                <div class="font-serif text-4xl font-bold text-brand-dark mb-2 counter" data-target="16">0</div>
+                <div class="text-gray-500 text-sm">年餐飲經驗</div>
+            </div>
+            <div class="reveal" style="transition-delay: 100ms;">
+                <div class="font-serif text-4xl font-bold text-brand-primary mb-2 counter" data-target="42">0</div>
+                <div class="text-gray-500 text-sm">間分店 (＋)</div>
+            </div>
+            <div class="reveal" style="transition-delay: 200ms;">
+                <div class="font-serif text-4xl font-bold text-brand-dark mb-2 counter" data-target="8">0</div>
+                <div class="text-gray-500 text-sm">個餐飲品牌</div>
+            </div>
+            <div class="reveal" style="transition-delay: 300ms;">
+                <div class="font-serif text-4xl font-bold text-brand-accent mb-2 counter" data-target="500">0</div>
+                <div class="text-gray-500 text-sm">款招牌菜式 (+)</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 關於我們 -->
+    <section id="about" class="py-20 bg-brand-cream">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-1/2 relative reveal">
+                    <img src="https://picsum.photos/id/1080/800/600" alt="餐廳環境" class="rounded-2xl shadow-2xl z-10 relative">
+                    <div class="absolute -bottom-10 -right-10 w-48 h-48 bg-brand-accent/15 rounded-full z-0 blur-3xl"></div>
+                    <div class="absolute -top-10 -left-10 w-48 h-48 bg-brand-primary/10 rounded-full z-0 blur-3xl"></div>
+                    <div class="absolute bottom-6 left-6 bg-brand-dark text-white px-6 py-4 rounded-xl shadow-xl">
+                        <p class="font-serif text-2xl font-bold text-brand-gold">1,500+</p>
+                        <p class="text-xs text-gray-300">每日服務食客人次</p>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 reveal">
+                    <h3 class="text-brand-primary font-bold tracking-[0.3em] uppercase mb-3">關於LOST Studio Limited</h3>
+                    <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-dark mb-6 leading-snug">由一間燒臘店，<br>到八大餐飲王國</h2>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        LOST Studio Limited，總部位於香港，2008 年由第一間燒味小店起步，發展至今已成為橫跨粵菜、火鍋、點心、甜品及茶餐廳的綜合餐飲集團。
+                    </p>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        我們與本地農場及漁民直接合作，嚴選新鮮食材；中央廚房獲 HACCP 認證，確保每道菜式安全、衛生、味道如一。
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-center"><i class="fas fa-star text-brand-accent mr-3"></i> 米芝蓮推薦餐廳兩家</li>
+                        <li class="flex items-center"><i class="fas fa-star text-brand-accent mr-3"></i> 自設中央廚房及物流車隊</li>
+                        <li class="flex items-center"><i class="fas fa-star text-brand-accent mr-3"></i> 逾 2,000 名專業餐飲團隊</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 旗下品牌 -->
+    <section id="brands" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <span class="text-brand-primary font-bold tracking-[0.3em]">OUR BRANDS</span>
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-dark mt-3 mb-4">旗下餐飲品牌</h2>
+                <p class="text-gray-500 max-w-xl mx-auto">總有一間，合你口味。</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="dish-card card-hover rounded-2xl overflow-hidden shadow-md border border-amber-100 bg-white reveal">
+                    <div class="relative h-52 overflow-hidden">
+                        <img src="https://picsum.photos/id/1081/800/500" alt="粵菜" class="w-full h-full object-cover">
+                        <span class="absolute top-4 left-4 bg-brand-primary text-white text-xs font-bold px-3 py-1 rounded-full">米芝蓮推薦</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-serif text-xl font-bold text-brand-dark mb-2">御膳房</h3>
+                        <p class="text-gray-500 text-sm mb-3"><i class="fas fa-map-marker-alt text-brand-primary mr-1"></i> 中環 · 高級粵菜</p>
+                        <p class="text-gray-500 text-sm">傳統手藝演繹新派粵菜，招牌脆皮燒鵝每日限量 30 隻。</p>
+                    </div>
+                </div>
+
+                <div class="dish-card card-hover rounded-2xl overflow-hidden shadow-md border border-amber-100 bg-white reveal" style="transition-delay: 100ms;">
+                    <div class="relative h-52 overflow-hidden">
+                        <img src="https://picsum.photos/id/429/800/500" alt="火鍋" class="w-full h-full object-cover">
+                        <span class="absolute top-4 left-4 bg-brand-accent text-white text-xs font-bold px-3 py-1 rounded-full">人氣之選</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-serif text-xl font-bold text-brand-dark mb-2">滾得棧</h3>
+                        <p class="text-gray-500 text-sm mb-3"><i class="fas fa-map-marker-alt text-brand-primary mr-1"></i> 旺角 · 港式火鍋</p>
+                        <p class="text-gray-500 text-sm">麻辣番茄鴛鴦鍋底遠近馳名，深夜 2 點仍座無虛席。</p>
+                    </div>
+                </div>
+
+                <div class="dish-card card-hover rounded-2xl overflow-hidden shadow-md border border-amber-100 bg-white reveal" style="transition-delay: 200ms;">
+                    <div class="relative h-52 overflow-hidden">
+                        <img src="https://picsum.photos/id/1076/800/500" alt="點心" class="w-full h-full object-cover">
+                        <span class="absolute top-4 left-4 bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full">街坊之選</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-serif text-xl font-bold text-brand-dark mb-2">一盅兩件</h3>
+                        <p class="text-gray-500 text-sm mb-3"><i class="fas fa-map-marker-alt text-brand-primary mr-1"></i> 將軍澳 · 懷舊點心</p>
+                        <p class="text-gray-500 text-sm">即叫即蒸手工點心，蝦餃燒賣日日新鮮出爐。</p>
+                    </div>
+                </div>
+
+                <div class="dish-card card-hover rounded-2xl overflow-hidden shadow-md border border-amber-100 bg-white reveal">
+                    <div class="relative h-52 overflow-hidden">
+                        <img src="https://picsum.photos/id/135/800/500" alt="甜品" class="w-full h-full object-cover">
+                        <span class="absolute top-4 left-4 bg-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full">IG 打卡熱點</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-serif text-xl font-bold text-brand-dark mb-2">甜絲絲</h3>
+                        <p class="text-gray-500 text-sm mb-3"><i class="fas fa-map-marker-alt text-brand-primary mr-1"></i> 銅鑼灣 · 甜品工房</p>
+                        <p class="text-gray-500 text-sm">楊枝甘露與疏乎厘班戟，香港甜品界的時尚新寵。</p>
+                    </div>
+                </div>
+
+                <div class="dish-card card-hover rounded-2xl overflow-hidden shadow-md border border-amber-100 bg-white reveal" style="transition-delay: 100ms;">
+                    <div class="relative h-52 overflow-hidden">
+                        <img src="https://picsum.photos/id/1077/800/500" alt="茶餐廳" class="w-full h-full object-cover">
+                        <span class="absolute top-4 left-4 bg-sky-600 text-white text-xs font-bold px-3 py-1 rounded-full">港式經典</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-serif text-xl font-bold text-brand-dark mb-2">冰室小館</h3>
+                        <p class="text-gray-500 text-sm mb-3"><i class="fas fa-map-marker-alt text-brand-primary mr-1"></i> 荃灣 · 冰室茶餐廳</p>
+                        <p class="text-gray-500 text-sm">懷舊冰室裝潢，黯然銷魂叉燒飯是鎮店之寶。</p>
+                    </div>
+                </div>
+
+                <div class="dish-card card-hover rounded-2xl overflow-hidden bg-brand-dark transition-all duration-300 reveal text-white" style="transition-delay: 200ms;">
+                    <div class="p-8 flex flex-col justify-center h-full">
+                        <div class="w-14 h-14 bg-brand-accent/20 text-brand-gold rounded-xl flex items-center justify-center text-2xl mb-6">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold mb-3">特許經營</h3>
+                        <p class="text-gray-200 text-sm leading-relaxed mb-4">
+                            旗下三大品牌現正招募特許經營夥伴，總部提供選址、培訓、物流及市場推廣全方位支援。
+                        </p>
+                        <a href="#contact" class="text-brand-gold text-sm font-semibold hover:underline">查詢加盟詳情 &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 招牌菜式 -->
+    <section id="dishes" class="py-20 bg-brand-dark relative overflow-hidden text-white">
+        <img src="https://picsum.photos/id/1080/1920/1080" class="absolute inset-0 w-full h-full object-cover opacity-10" alt="bg">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <span class="text-brand-gold font-bold tracking-[0.3em]">SIGNATURE DISHES</span>
+                <h2 class="font-serif text-3xl md:text-4xl font-bold mt-3 mb-4">招牌菜式巡禮</h2>
+                <p class="text-gray-200 max-w-xl mx-auto">五道必試名菜，見證集團的匠心與堅持。</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card-hover p-8 bg-white/5 backdrop-blur rounded-2xl border border-white/10 reveal">
+                    <div class="flex items-start gap-5">
+                        <div class="w-16 h-16 bg-brand-primary/30 rounded-xl flex items-center justify-center text-3xl flex-shrink-0">
+                            <i class="fas fa-drumstick-bite text-brand-accent"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-serif text-xl font-bold mb-2">古法脆皮燒鵝</h4>
+                            <p class="text-gray-200 text-sm leading-relaxed">荔枝木炭火燒製，皮脆肉嫩，每日限量供應，被譽為「香港第一鵝」。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-hover p-8 bg-white/5 backdrop-blur rounded-2xl border border-white/10 reveal" style="transition-delay: 100ms;">
+                    <div class="flex items-start gap-5">
+                        <div class="w-16 h-16 bg-brand-primary/30 rounded-xl flex items-center justify-center text-3xl flex-shrink-0">
+                            <i class="fas fa-shrimp text-brand-accent"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-serif text-xl font-bold mb-2">避風塘炒蟹</h4>
+                            <p class="text-gray-200 text-sm leading-relaxed">選用越南肉蟹，配以金蒜香葱大火快炒，香口惹味，蒜香四溢。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-hover p-8 bg-white/5 backdrop-blur rounded-2xl border border-white/10 reveal">
+                    <div class="flex items-start gap-5">
+                        <div class="w-16 h-16 bg-brand-primary/30 rounded-xl flex items-center justify-center text-3xl flex-shrink-0">
+                            <i class="fas fa-mug-hot text-brand-accent"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-serif text-xl font-bold mb-2">絲襪奶茶</h4>
+                            <p class="text-gray-200 text-sm leading-relaxed">五種茶葉秘方拼配，撞茶八次，茶味濃而不澀，香港味道的代表。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-hover p-8 bg-white/5 backdrop-blur rounded-2xl border border-white/10 reveal" style="transition-delay: 100ms;">
+                    <div class="flex items-start gap-5">
+                        <div class="w-16 h-16 bg-brand-primary/30 rounded-xl flex items-center justify-center text-3xl flex-shrink-0">
+                            <i class="fas fa-cake-candles text-brand-accent"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-serif text-xl font-bold mb-2">楊枝甘露</h4>
+                            <p class="text-gray-200 text-sm leading-relaxed">呂宋芒果配西柚肉，酸甜平衡，香滑濃稠，售出超過 100 萬碗。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 供應鏈承諾 -->
+    <section class="py-16 bg-brand-primary text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 20% 50%, white 2px, transparent 2px); background-size: 30px 30px;"></div>
+        <div class="container mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center justify-between">
+            <div class="md:w-2/3 reveal">
+                <h3 class="font-serif text-2xl font-bold mb-2">從農場到餐桌，新鮮看得見</h3>
+                <p class="text-red-100 opacity-95">LOST Studio Limited 自設有機農場及養魚場，食材供應可追溯，讓每一位食客食得安心。</p>
+            </div>
+            <div class="mt-6 md:mt-0 md:w-1/3 flex justify-end reveal">
+                <a href="#contact" class="px-6 py-3 bg-white text-brand-primary font-bold rounded-lg hover:bg-gray-100 transition shadow-lg">預約品嚐</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 訂座流程 -->
+    <section id="process" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-serif text-3xl font-bold text-brand-dark">三步輕鬆訂座</h2>
+                <p class="text-gray-500 mt-2">從揀選餐廳到入座，只需幾分鐘</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+                <div class="hidden md:block absolute top-12 left-[10%] right-[10%] h-0.5 bg-amber-200"></div>
+
+                <div class="text-center reveal">
+                    <div class="w-24 h-24 bg-brand-cream mx-auto rounded-full flex items-center justify-center border-4 border-brand-accent shadow-lg mb-6">
+                        <i class="fas fa-store text-3xl text-brand-primary"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">1. 揀選餐廳</h4>
+                    <p class="text-gray-500 text-sm px-4">瀏覽旗下品牌，揀選心儀餐廳與時段。</p>
+                </div>
+
+                <div class="text-center reveal" style="transition-delay: 100ms;">
+                    <div class="w-24 h-24 bg-brand-cream mx-auto rounded-full flex items-center justify-center border-4 border-brand-accent shadow-lg mb-6">
+                        <i class="fas fa-calendar-check text-3xl text-brand-primary"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">2. 網上訂座</h4>
+                    <p class="text-gray-500 text-sm px-4">填寫人數及時間，即時確認訂座通知。</p>
+                </div>
+
+                <div class="text-center reveal" style="transition-delay: 200ms;">
+                    <div class="w-24 h-24 bg-brand-cream mx-auto rounded-full flex items-center justify-center border-4 border-brand-accent shadow-lg mb-6">
+                        <i class="fas fa-bell-concierge text-3xl text-brand-primary"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">3. 到店享用</h4>
+                    <p class="text-gray-500 text-sm px-4">按時到店，專人安排入座，盡享美食。</p>
+                </div>
+
+                <div class="text-center reveal" style="transition-delay: 300ms;">
+                    <div class="w-24 h-24 bg-brand-dark mx-auto rounded-full flex items-center justify-center border-4 border-brand-accent shadow-lg mb-6">
+                        <i class="fas fa-gift text-3xl text-brand-gold"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">4. 會員積分</h4>
+                    <p class="text-gray-500 text-sm px-4">消費儲積分，換領現金券及生日優惠。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 食客心聲 -->
+    <section class="py-20 bg-brand-cream">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <span class="text-brand-primary font-bold tracking-[0.3em]">TESTIMONIALS</span>
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-dark mt-3 mb-4">食客心聲</h2>
+                <p class="text-gray-500 max-w-xl mx-auto">每一句好評，都是我們繼續進步的動力。</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-2xl shadow-lg p-8 reveal">
+                    <div class="flex items-center mb-6">
+                        <div class="w-14 h-14 rounded-full bg-gradient-to-br from-brand-primary to-brand-accent flex items-center justify-center text-white font-bold text-xl mr-4">周</div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">周小姐</h4>
+                            <p class="text-sm text-gray-500">御膳房常客</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">「脆皮燒鵝真係一絕！皮脆肉嫩，每次帶外地朋友來都必定點這道，店員服務也非常周到。」</p>
+                    <div class="flex text-amber-400 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                </div>
+                <div class="bg-white rounded-2xl shadow-lg p-8 reveal" style="transition-delay: 100ms;">
+                    <div class="flex items-center mb-6">
+                        <div class="w-14 h-14 rounded-full bg-gradient-to-br from-brand-primary to-brand-accent flex items-center justify-center text-white font-bold text-xl mr-4">陳</div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">陳先生</h4>
+                            <p class="text-sm text-gray-500">滾得棧會員</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">「鴛鴦鍋底味道正宗，食材新鮮，深夜兩點仍然座無虛席。會員積分換了很多現金券，非常實惠！」</p>
+                    <div class="flex text-amber-400 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                </div>
+                <div class="bg-white rounded-2xl shadow-lg p-8 reveal" style="transition-delay: 200ms;">
+                    <div class="flex items-center mb-6">
+                        <div class="w-14 h-14 rounded-full bg-gradient-to-br from-brand-primary to-brand-accent flex items-center justify-center text-white font-bold text-xl mr-4">林</div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">林太太</h4>
+                            <p class="text-sm text-gray-500">家庭聚會客戶</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">「公司年會訂了他們的到會服務，食物質素高又準時送到，同事們都讚不絕口，明年一定再幫襯。」</p>
+                    <div class="flex text-amber-400 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 餐飲增值服務 -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <span class="text-brand-primary font-bold tracking-[0.3em]">VALUE-ADDED</span>
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-dark mt-3 mb-4">餐飲增值服務</h2>
+                <p class="text-gray-500 max-w-xl mx-auto">不止美食，我們更貼心照顧您每個餐飲需求。</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="bg-brand-cream rounded-2xl border border-amber-100 p-6 text-center reveal">
+                    <div class="w-12 h-12 bg-amber-100 text-brand-primary rounded-xl flex items-center justify-center text-xl mx-auto mb-4"><i class="fas fa-people-roof"></i></div>
+                    <h4 class="font-bold text-gray-800 mb-2">宴會到會</h4>
+                    <p class="text-gray-500 text-sm">婚宴、春茗及公司活動，專人到會服務。</p>
+                </div>
+                <div class="bg-brand-cream rounded-2xl border border-amber-100 p-6 text-center reveal" style="transition-delay: 100ms;">
+                    <div class="w-12 h-12 bg-amber-100 text-brand-primary rounded-xl flex items-center justify-center text-xl mx-auto mb-4"><i class="fas fa-id-card"></i></div>
+                    <h4 class="font-bold text-gray-800 mb-2">會員計劃</h4>
+                    <p class="text-gray-500 text-sm">跨品牌消費儲分，生日及節日專屬禮遇。</p>
+                </div>
+                <div class="bg-brand-cream rounded-2xl border border-amber-100 p-6 text-center reveal" style="transition-delay: 200ms;">
+                    <div class="w-12 h-12 bg-amber-100 text-brand-primary rounded-xl flex items-center justify-center text-xl mx-auto mb-4"><i class="fas fa-motorcycle"></i></div>
+                    <h4 class="font-bold text-gray-800 mb-2">外賣配送</h4>
+                    <p class="text-gray-500 text-sm">全港外賣自取及外送，最快 30 分鐘送到。</p>
+                </div>
+                <div class="bg-brand-cream rounded-2xl border border-amber-100 p-6 text-center reveal" style="transition-delay: 300ms;">
+                    <div class="w-12 h-12 bg-amber-100 text-brand-primary rounded-xl flex items-center justify-center text-xl mx-auto mb-4"><i class="fas fa-building"></i></div>
+                    <h4 class="font-bold text-gray-800 mb-2">企業餐飲卡</h4>
+                    <p class="text-gray-500 text-sm">公司員工餐飲福利卡，跨品牌通用更靈活。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-20 bg-brand-cream">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <h2 class="font-serif text-3xl font-bold text-center text-brand-dark mb-12 reveal">常見問題</h2>
+
+            <div class="space-y-4">
+                <div class="bg-white p-6 rounded-lg shadow-sm reveal">
+                    <h4 class="font-bold text-lg mb-2 text-gray-800"><i class="far fa-question-circle text-brand-primary mr-2"></i> 可以安排包場或婚宴服務嗎？</h4>
+                    <p class="text-gray-600">可以。「御膳房」及「滾得棧」設有宴會廳，可容納 20 至 300 人，提供婚宴、商務宴會及公司春茗套餐，歡迎致電 57017745 查詢。</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm reveal">
+                    <h4 class="font-bold text-lg mb-2 text-gray-800"><i class="far fa-question-circle text-brand-primary mr-2"></i> 是否提供外賣及到會服務？</h4>
+                    <p class="text-gray-600">提供。全線分店支援外賣自取及外送，另設到會服務，專車送貨，適合家庭聚會及公司活動，詳情可瀏覽 loststudiohk.com。</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm reveal">
+                    <h4 class="font-bold text-lg mb-2 text-gray-800"><i class="far fa-question-circle text-brand-primary mr-2"></i> 如何加盟旗下品牌？</h4>
+                    <p class="text-gray-600">歡迎填寫頁尾表格或電郵至 contact@loststudiohk.com，加盟專員將於 3 個工作天內與您聯絡，介紹品牌特許經營計劃詳情。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-20 bg-brand-deep relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-brand-primary/30 to-transparent"></div>
+        <div class="container mx-auto px-6 text-center relative z-10 text-white">
+            <h2 class="font-serif text-3xl md:text-4xl font-bold mb-6">今晚，一起開飯吧</h2>
+            <p class="text-xl text-gray-100 mb-10">LOST Studio Limited 旗下 42 間分店，總有一間在你附近。</p>
+            <a href="#contact" class="inline-block px-10 py-4 bg-brand-accent text-brand-dark font-bold rounded-full shadow-xl hover:bg-amber-600 transform hover:scale-105 transition duration-300">
+                立即訂座
+            </a>
+        </div>
+    </section>
+
+    <!-- 頁腳 -->
+    <footer id="contact" class="bg-brand-dark text-gray-200 pt-20 pb-10">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <div>
+                    <h3 class="font-serif text-white text-2xl font-bold mb-6">LOST Studio Limited</h3>
+                    <p class="mb-6 text-sm leading-relaxed">
+                        以美食連結人心，LOST Studio Limited 堅持用新鮮食材與真誠服務，煮好每一餐飯，服務每一位香港人。
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-brand-deep flex items-center justify-center hover:bg-brand-accent hover:text-brand-dark transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-brand-deep flex items-center justify-center hover:bg-brand-accent hover:text-brand-dark transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-brand-deep flex items-center justify-center hover:bg-brand-accent hover:text-brand-dark transition"><i class="fab fa-weixin"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-brand-deep flex items-center justify-center hover:bg-brand-accent hover:text-brand-dark transition"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-6">快速連結</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#home" class="hover:text-brand-accent transition">首頁</a></li>
+                        <li><a href="#about" class="hover:text-brand-accent transition">關於我們</a></li>
+                        <li><a href="#brands" class="hover:text-brand-accent transition">旗下品牌</a></li>
+                        <li><a href="#" class="hover:text-brand-accent transition">餐飲外賣</a></li>
+                        <li><a href="#" class="hover:text-brand-accent transition">加盟申請</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-6">聯絡方式</h4>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-brand-accent"></i>
+                            <span>Rm 1901D EASTERN CTR 1065 KING'S RD</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-brand-accent"></i>
+                            <a href="mailto:contact@loststudiohk.com" class="hover:text-white transition">contact@loststudiohk.com</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-3 text-brand-accent"></i>
+                            <a href="tel:57017745" class="hover:text-white transition text-lg font-bold">57017745</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-globe mr-3 text-brand-accent"></i>
+                            <span>loststudiohk.com</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-6">訂座查詢</h4>
+                    <form onsubmit="event.preventDefault(); alert('感謝您的查詢，我們會盡快與您確認訂座！');" class="space-y-3">
+                        <input type="text" placeholder="您的稱呼" class="w-full bg-brand-deep border border-white/10 rounded py-3 px-4 text-white focus:ring-2 focus:ring-brand-accent outline-none text-sm">
+                        <input type="text" placeholder="聯絡電話" class="w-full bg-brand-deep border border-white/10 rounded py-3 px-4 text-white focus:ring-2 focus:ring-brand-accent outline-none text-sm">
+                        <select class="w-full bg-brand-deep border border-white/10 rounded py-3 px-4 text-gray-200 focus:ring-2 focus:ring-brand-accent outline-none text-sm">
+                            <option>選擇餐廳</option>
+                            <option>御膳房</option>
+                            <option>滾得棧</option>
+                            <option>一盅兩件</option>
+                            <option>冰室小館</option>
+                        </select>
+                        <button type="submit" class="w-full bg-brand-accent text-brand-dark font-bold py-3 rounded hover:bg-amber-600 transition">提交訂座</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs">
+                <p>&copy; 2026 LOST Studio Limited 版權所有</p>
+                <div class="mt-4 md:mt-0 space-x-6">
+                    <a href="#" class="hover:text-brand-accent">私隱政策</a>
+                    <a href="#" class="hover:text-brand-accent">服務條款</a>
+                    <a href="#" class="hover:text-brand-accent">食品安全承諾</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#home" id="backToTop" class="fixed bottom-8 right-8 bg-brand-accent text-brand-dark w-12 h-12 rounded-full flex items-center justify-center shadow-lg transform translate-y-20 transition-all duration-300 z-40 hover:bg-brand-primary">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        const navbar = document.getElementById('navbar');
+        const backToTop = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('glass-nav', 'py-2');
+                navbar.classList.remove('py-5');
+                backToTop.classList.remove('translate-y-20');
+            } else {
+                navbar.classList.remove('glass-nav', 'py-2');
+                navbar.classList.add('py-5');
+                backToTop.classList.add('translate-y-20');
+            }
+        });
+
+        const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    if (entry.target.querySelector('.counter') && !entry.target.dataset.counted) {
+                        startCounters(entry.target);
+                        entry.target.dataset.counted = true;
+                    }
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        function startCounters(section) {
+            const counters = section.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const duration = 2000;
+                const step = target / (duration / 16);
+                let current = 0;
+                const updateCounter = () => {
+                    current += step;
+                    if (current < target) {
+                        counter.innerText = Math.ceil(current);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCounter();
+            });
+        }
+
+        document.querySelector('.fa-bars')?.parentElement?.addEventListener('click', () => {
+            alert('移動端菜單點擊 (此處可擴展側邊欄邏輯)');
+        });
+    </script>
+</body>
+</html>
